@@ -2,20 +2,20 @@
 
 int pirPin = 8;
 int servoPin = 9;
-int hareket;
+int motion;
 Servo motor;
 
 void setup() {
-  // put your setup code here, to run once:
+  // Setup code here, to run once
   motor.attach(servoPin);
   pinMode(pirPin, INPUT);
 }
 
 void loop() {
-  // put your main code here, to run repeatedly:
-  hareket = digitalRead(pirPin);
+  // Main code here, to run repeatedly
+  motion = digitalRead(pirPin);
 
-  if (hareket == HIGH) {
+  if (motion == HIGH) {
     motor.write(150);
     delay(250);
     motor.write(30);

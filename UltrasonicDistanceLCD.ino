@@ -2,32 +2,39 @@
 
 int trigPin = 7;
 int echoPin = 6;
-int sure;
-int uzaklik;
+int duration;
+int distance;
 int rs = 12, en = 11, d4 = 5, d5 = 4, d6 = 3, d7 = 2;
 LiquidCrystal lcd(rs, en, d4, d5, d6, d7);
 
 void setup() {
-  // put your setup code here, to run once:
+  // Initialize pins
   pinMode(trigPin, OUTPUT);
   pinMode(echoPin, INPUT);
-  lcd.begin(16, 2);
+  lcd.begin(16, 2);  // Initialize LCD
 }
 
 void loop() {
-  // put your main code here, to run repeatedly:
+  // Trigger the ultrasonic sensor
   digitalWrite(trigPin, LOW);
   delayMicroseconds(5);
   digitalWrite(trigPin, HIGH);
   delayMicroseconds(10);
   digitalWrite(trigPin, LOW);
-  sure = pulseIn(echoPin, HIGH, 11600);
-  uzaklik = sure * 0.345 / 2;
+
+  // Read the time duration of the echo
+  duration = pulseIn(echoPin, HIGH, 11600);
+
+  // Calculate distance
+  distance = duration * 0.345 / 2;
+
   delay(250);
+
+  // Clear the LCD screen
   lcd.clear();
   lcd.setCursor(0, 0);
-  lcd.print("Uzaklik:");
+  lcd.print("Distance:");
   lcd.setCursor(0, 1);
-  lcd.print(uzaklik);
+  lcd.print(distance);
   lcd.print("cm");
 }
